@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Messanger.Core\Messanger.Core.csproj" />
     <ProjectReference Include="..\Messanger.DataAccess\Messanger.DataAccess.csproj" />
     <ProjectReference Include="..\Messanger.Services\Messanger.Services.csproj" />
   </ItemGroup>

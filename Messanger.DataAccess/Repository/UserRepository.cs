@@ -29,7 +29,7 @@ namespace Messanger.DataAccess.Repository
                 .AsNoTracking()
                 .ToListAsync();
             var users = userEntities
-                .Select(u => User.Create(u.id, u.username, u.password, u.email).User)
+                .Select(u => User.Create(u.username, u.password, u.email).User)
                 .ToList(); // Возвращаю кортеж user и возвращаю как список
 
             return users;
@@ -40,14 +40,14 @@ namespace Messanger.DataAccess.Repository
         {
             var userEntity = new UserEntity
             {
-                id = user.id,
+                
                 username = user.username,
                 password = user.password,
                 email = user.email,
             };
             await context.users.AddAsync(userEntity);
             await context.SaveChangesAsync();
-            Console.WriteLine($"Adding new users:  {userEntity.id}, {userEntity.username.ToUpper()}");
+            Console.WriteLine($"Adding new users:, {userEntity.username.ToUpper()}");
             return userEntity.id;
         }
 
