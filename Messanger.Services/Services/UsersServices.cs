@@ -1,4 +1,5 @@
 ﻿using Messanger.Core.Models;
+using Messanger.Crypto;
 using Messanger.DataAccess.Repository;
 
 namespace Messanger.Services.Services
@@ -27,6 +28,10 @@ namespace Messanger.Services.Services
         public async Task<int> UpdateUser(int id, string username, string password, string email)
         {
             return await repository.Update(id, username, password, email);
+        }
+        public async Task<bool> ValidateUser(string username, string password)
+        {
+            return await repository.ValidateUser(username, password);
         }
     }
 }

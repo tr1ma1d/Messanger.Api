@@ -2,8 +2,9 @@
 {
     public record UsersResponse(
         string Username,
-        string Email,
-        string Password
+        string Password,
+        string Email
+       
     );
    
 

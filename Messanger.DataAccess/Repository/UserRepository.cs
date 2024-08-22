@@ -1,4 +1,5 @@
 ﻿using Messanger.Core.Models;
+using Messanger.Crypto;
 using Messanger.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,7 @@ namespace Messanger.DataAccess.Repository
         //adding users to database 
         public async Task<int> Add(User user)
         {
+
             var userEntity = new UserEntity
             {
                 
@@ -73,6 +75,23 @@ namespace Messanger.DataAccess.Repository
                 .ExecuteDeleteAsync();
 
             return id;
+        }
+
+        public async Task<bool> ValidateUser(string username, string password)
+        {
+            var user = await context.users.SingleOrDefaultAsync(x => x.username == username);
+
+            // Если пользователь не найден, возвращаем false
+            if (user == null)
+                return false;
+            CryptoPassword cryptoPassword = new CryptoPassword();
+            password = cryptoPassword.CryptoPasswords(password);
+            // Сравниваем пароль (без хеширования)
+            bool isPasswordValid = user.password == password;
+
+            // Возвращаем результат проверки пароля
+            return isPasswordValid;
+
         }
     }
 }

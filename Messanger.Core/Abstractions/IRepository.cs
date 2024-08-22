@@ -8,5 +8,6 @@ namespace Messanger.DataAccess.Repository
         Task<int> Delete(int id);
         Task<List<User>> Get();
         Task<int> Update(int id, string username, string password, string email);
+        Task<bool> ValidateUser(string username, string password);
     }
 }

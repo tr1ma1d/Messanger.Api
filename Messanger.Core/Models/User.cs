@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messanger.Crypto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,17 @@ namespace Messanger.Core.Models
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 error = "Имя пользователя или пароль не могут быть пустыми";
+                return (null, error);
+            }
+
+            try
+            {
+                CryptoPassword cryptoPassword = new CryptoPassword();
+                password = cryptoPassword.CryptoPasswords(password);
+            }
+            catch (Exception ex)
+            {
+                return (null, $"Ошибка шифрования пароля: {ex.Message}");
             }
 
             var user = new User(username, password, email);

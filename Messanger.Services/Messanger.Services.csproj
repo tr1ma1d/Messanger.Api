@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Messanger.Core\Messanger.Core.csproj" />
+    <ProjectReference Include="..\Messanger.Crypto\Messanger.Crypto.csproj" />
     <ProjectReference Include="..\Messanger.DataAccess\Messanger.DataAccess.csproj" />
   </ItemGroup>
 

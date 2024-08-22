@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messanger.DataAccess", "Mes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messanger.Services", "Messanger.Services\Messanger.Services.csproj", "{342E59C2-EFBB-40F0-9EAA-2C65CAC981BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messanger.Crypto", "Messanger.Crypto\Messanger.Crypto.csproj", "{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{342E59C2-EFBB-40F0-9EAA-2C65CAC981BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{342E59C2-EFBB-40F0-9EAA-2C65CAC981BF}.Release|x86.ActiveCfg = Release|x86
 		{342E59C2-EFBB-40F0-9EAA-2C65CAC981BF}.Release|x86.Build.0 = Release|x86
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Debug|x86.Build.0 = Debug|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F55BFB5-253F-4D2E-8A26-E55B9DC8429C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

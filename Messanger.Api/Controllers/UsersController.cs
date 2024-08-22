@@ -24,7 +24,7 @@ namespace Messanger.Api.Controllers
             var response = users.Select(b => new UsersResponse(b.username , b.password, b.email)).ToList();
             return Ok(response);
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<int>> AddUser([FromBody] UsersRequest request)
         {
             var (user, error) = Core.Models.User.Create(
@@ -40,6 +40,19 @@ namespace Messanger.Api.Controllers
             await userServices.CreateUser(user);
 
             return Ok(user.id);
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<int>> LoginUser([FromBody] UsersLoginResponse request)
+        {
+            bool users = await userServices.ValidateUser(request.Username, request.Password);
+            if(users == false)
+            {
+                return Unauthorized(new { message = "Invalid username or password" });
+            
+            }
+
+            return Ok(new { message = "Login successful" });
         }
 
     }
