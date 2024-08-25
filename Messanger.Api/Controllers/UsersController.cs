@@ -7,8 +7,10 @@ namespace Messanger.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     public class UsersController : ControllerBase
     {
+
         private readonly IUsersServices userServices;
 
         public UsersController(IUsersServices userServices)

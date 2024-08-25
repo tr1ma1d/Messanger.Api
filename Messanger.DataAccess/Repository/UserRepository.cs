@@ -2,6 +2,7 @@
 using Messanger.Crypto;
 using Messanger.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Messanger.DataAccess.Repository
 {
@@ -15,6 +16,8 @@ namespace Messanger.DataAccess.Repository
 
     public class UserRepository : IRepository
     {
+        private readonly IDatabase _redisDb;
+
         //connect with ours DataBase
         private readonly MessangerDbContext context;
         //Get context than connect database and manage him
@@ -39,17 +42,19 @@ namespace Messanger.DataAccess.Repository
         //adding users to database 
         public async Task<int> Add(User user)
         {
+           
+           // Шифрование пароля
 
             var userEntity = new UserEntity
             {
-                
                 username = user.username,
-                password = user.password,
+                password = user.password, // Сохранение зашифрованного пароля
                 email = user.email,
             };
+
             await context.users.AddAsync(userEntity);
             await context.SaveChangesAsync();
-            Console.WriteLine($"Adding new users:, {userEntity.username.ToUpper()}");
+            Console.WriteLine($"Adding new user: {userEntity.username.ToUpper()}");
             return userEntity.id;
         }
 
@@ -81,17 +86,12 @@ namespace Messanger.DataAccess.Repository
         {
             var user = await context.users.SingleOrDefaultAsync(x => x.username == username);
 
-            // Если пользователь не найден, возвращаем false
             if (user == null)
                 return false;
+
             CryptoPassword cryptoPassword = new CryptoPassword();
-            password = cryptoPassword.CryptoPasswords(password);
-            // Сравниваем пароль (без хеширования)
-            bool isPasswordValid = user.password == password;
-
-            // Возвращаем результат проверки пароля
-            return isPasswordValid;
-
+            return cryptoPassword.VerifyPassword(password, user.password);
         }
+
     }
 }

@@ -6,9 +6,12 @@ namespace Messanger.Crypto
     public class CryptoPassword
     {
 
+        private const string Salt = "hgbuyadsfasdlf"; // Фиксированная соль
+
+        // Метод для хеширования пароля при регистрации
         public string CryptoPasswords(string password)
         {
-            password += "hgbuyadsfasdlf";
+            password += Salt; // Добавляем соль
             var hash = SHA256.HashData(Encoding.UTF8.GetBytes(password));
             var stringBuilder = new StringBuilder();
 
@@ -17,18 +20,29 @@ namespace Messanger.Crypto
                 stringBuilder.Append(b.ToString("X2"));
             }
 
-            // Создание AES сессии
-            using var myAes = Aes.Create();
-            myAes.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
-            myAes.GenerateIV(); // Генерация IV
-
-            // Шифрование строки
-            var encrypted = Cryptor.EncryptStringToBytes_Aes(stringBuilder.ToString(), myAes.Key, myAes.IV);
-            var result = Convert.ToBase64String(encrypted);
-
-            // Возвращаем зашифрованное значение
-            return result;
+            return stringBuilder.ToString(); // Возвращаем хешированный пароль
         }
+
+        // Метод для проверки пароля при входе
+        public bool VerifyPassword(string password, string storedHash)
+        {
+            password += Salt; // Добавляем ту же соль
+            
+
+            var hash = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+            var stringBuilder = new StringBuilder();
+
+            foreach (var b in hash)
+            {
+                stringBuilder.Append(b.ToString("X2"));
+            }
+
+            var hashedEnteredPassword = stringBuilder.ToString();
+            Console.WriteLine($"Hashed entered password: {hashedEnteredPassword}");
+
+            return storedHash == hashedEnteredPassword; // Сравниваем хеши
+        }
+
     }
 
     public static class Cryptor
