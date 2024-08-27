@@ -2,11 +2,11 @@
 
 namespace Messanger.DataAccess.Repository
 {
-    public interface IRepository
+    public interface IRepository<in T> where T : class
     {
-        Task<int> Add(User user);
+        Task<int> Add(T data);
         Task<int> Delete(int id);
-        Task<List<User>> Get();
+        Task<List<T>> Get();
         Task<int> Update(int id, string username, string password, string email);
         Task<bool> ValidateUser(string username, string password);
     }

@@ -14,7 +14,7 @@ namespace Messanger.DataAccess.Repository
     // This is class for just get and manage thim
 
 
-    public class UserRepository : IRepository
+    public class UserRepository : IRepository<User>
     {
         private readonly IDatabase _redisDb;
 
@@ -40,16 +40,16 @@ namespace Messanger.DataAccess.Repository
         }
 
         //adding users to database 
-        public async Task<int> Add(User user)
+        public async Task<int> Add(User data)
         {
            
            // Шифрование пароля
 
             var userEntity = new UserEntity
             {
-                username = user.username,
-                password = user.password, // Сохранение зашифрованного пароля
-                email = user.email,
+                username = data.username,
+                password = data.password, // Сохранение зашифрованного пароля
+                email = data.email,
             };
 
             await context.users.AddAsync(userEntity);

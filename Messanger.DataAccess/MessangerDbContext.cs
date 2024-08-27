@@ -9,5 +9,10 @@ namespace Messanger.DataAccess
         {
         }
         public DbSet<UserEntity> users { get; set; }
+        public DbSet<ChatEntity> chats { get; set; }
+        public DbSet<ChatMemberEntity> chatmembers { get; set; }
+        public DbSet<MessagesEntity> messages { get; set; } 
+        public DbSet<PersonalChatEntity> personalchats { get; set; }
+        
     }
 }
